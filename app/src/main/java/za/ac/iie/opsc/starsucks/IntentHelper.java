@@ -15,6 +15,18 @@ public class IntentHelper{
 
     }
 
+    public  static  void shareIntent(Context context, String order)
+    {
+        Intent sendIntent = new Intent();
+
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, order);
+
+        sendIntent.setType("text/plain");
+        Intent shareIntent = Intent.createChooser(sendIntent, "null");
+        context.startActivity(shareIntent);
+    }
+
     public static void shareIntent(Context context, String order, Class passTo){
         Intent sendIntent = new Intent(context, passTo);
 

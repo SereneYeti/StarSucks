@@ -3,6 +3,7 @@ package za.ac.iie.opsc.starsucks;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,6 +39,8 @@ public class OrderDetailsActivity extends AppCompatActivity {
         //set the ordered value on the text view
         placedOrder.setText(orderedValue);
 
+
+        /*
         switch(orderedValue){
             case "Soy Latte":
                 imgOrderedBevarage.setImageResource(R.drawable.sb1);
@@ -58,5 +61,13 @@ public class OrderDetailsActivity extends AppCompatActivity {
                 imgOrderedBevarage.setImageResource(R.drawable.sb6);
                 break;
         }
+         */
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentHelper.shareIntent(OrderDetailsActivity.this, orderedValue);
+            }
+        });
     }
 }

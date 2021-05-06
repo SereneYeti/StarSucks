@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single"
+        android:enabled="true"
+        android:visible="true" >
+        <item
+            android:icon="@drawable/ic_menu_main"
+            android:title="Place An Order" />
+        <item
+            android:id="@+id/nav_Photo"
+            android:icon="@drawable/ic_baseline_menu_book_24"
+            android:title="Take a Photo" />
+    </group>
+</menu>
