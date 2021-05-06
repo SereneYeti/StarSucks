@@ -1,13 +1,22 @@
 package za.ac.iie.opsc.starsucks;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import com.google.android.material.navigation.NavigationView;
+
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private ImageView img_sb1;
     private ImageView img_sb2;
@@ -15,14 +24,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView img_sb4;
     private ImageView img_sb5;
     private ImageView img_sb6;
-
     private Order order;
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggleOnOff;
+    private  NavigationView navigationView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_with_nav_drawer);
+
+        toolbar = findViewById(R.id.nav_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        toggleOnOff = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggleOnOff);
+        toggleOnOff.syncState();
+
+        navigationView = findViewById(R.id.nav_View);
+        navigationView.bringToFront();
+        navigationView.setNavigationItemSelectedListener(this);
 
         order = new Order();
 
@@ -104,5 +130,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 order.getProductName(),Toast.LENGTH_SHORT).show();
         order.intentHelper.openIntent(this,
                 order.getCustomerName(),OrderDetailsActivity.class);
+    }
+
+    @Override
+    public void onBackPressed() {
+       if(drawerLayout.isDrawerOpen(GravityCompat.START))
+       {
+           drawerLayout.closeDrawer(GravityCompat.START);
+       }
+       else
+       {
+           super.onBackPressed();
+       }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch ((item.getItemId()))
+        {
+            case R.id.nav_Photo:
+                IntentHelper.openIntent(this, "", CoffeeSnapsActivity.class);
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return  true;
     }
 }

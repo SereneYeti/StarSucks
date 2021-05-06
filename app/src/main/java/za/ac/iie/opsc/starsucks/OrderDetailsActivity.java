@@ -40,7 +40,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
         placedOrder.setText(orderedValue);
 
 
-        /*
+
         switch(orderedValue){
             case "Soy Latte":
                 imgOrderedBevarage.setImageResource(R.drawable.sb1);
@@ -61,7 +61,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
                 imgOrderedBevarage.setImageResource(R.drawable.sb6);
                 break;
         }
-         */
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
